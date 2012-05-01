@@ -1,0 +1,24 @@
+Source: postgresql-pg-collkey
+Section: database
+Priority: optional
+Maintainer: Cody Cutrer <cody@cutrer.us>
+Uploaders: Cody Cutrer <cody@cutrer.us>
+Build-Depends: debhelper (>= 7), libicu-dev (>= 3.4),
+ postgresql-server-dev-all (>= 119~)
+Standards-Version: 3.9.2
+Homepage: http://www.public-software-group.org/pg_collkey
+Vcs-Git: git@github.com:ccutrer/pg_collkey.git
+Vcs-Browser: https://github.com/ccutrer/pg_collkey
+
+Package: postgresql-PGVERSION-pg-collkey
+Architecture: any
+Depends: postgresql-PGVERSION, ${misc:Depends}, ${shlibs:Depends}
+Description: ICU collation function wrapper for PostgreSQL PGVERSION
+ pg_collkey is a wrapper to use the collation functions of the ICU library with
+ a PostgreSQL database server. Using this wrapper, you can specify the desired
+ locale for sorting UTF-8 strings directly in the SQL query, rather than
+ setting it during database installation. Default Unicode collation (DUCET) is
+ supported as well. You can select whether punctuation should be a primary
+ collation attribute or not. The level of comparison can be limited (in order
+ to ignore accents for example). Numbers inside strings can be recognized, so
+ that 'test2' is placed before 'test10'.

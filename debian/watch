@@ -1,0 +1,2 @@
+version=3
+http://www.public-software-group.org/pg_collkey pub/projects/pg_collkey/v[0-9.]+/pg_collkey-v([0-9.]+).tar.gz debian uupdate

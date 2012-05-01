@@ -1,0 +1,5 @@
+postgresql-pg-collkey (0.5-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Cody Cutrer <cody@cutrer.us>  Tue, 01 May 2012 14:32:56 -0600
