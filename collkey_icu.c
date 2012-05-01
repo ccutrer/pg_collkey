@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2006, FlexiGuided GmbH, Berlin, Germany
+ *  Copyright (c) 2006-2009, FlexiGuided GmbH, Berlin, Germany
  *  Author: Jan Behrens <jan.behrens@flexiguided.de>
  *  All rights reserved.
  *
@@ -185,7 +185,8 @@ Datum pgsqlext_collkey(PG_FUNCTION_ARGS) {
     output = palloc(output_length + VARHDRSZ - 1 + 4);
     ucol_getSortKey(coll, ustr, ustr_length,
       VARDATA(output), output_length - 1 + 4);
-    VARATT_SIZEP(output) = output_length + VARHDRSZ - 1;
+    SET_VARSIZE(output, output_length + VARHDRSZ - 1);
+
   }
 
   pfree(ustr);
