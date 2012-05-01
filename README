@@ -26,11 +26,12 @@ recognized, so that 'test2' is placed before 'test10'.
 
 *** INSTALLATION ***
 
-1. Edit the Makefile by setting a correct path to the library (icu_libdir)
-   and include (icu_incdir) directory of libicu.
+1. Ensure icu-config and pg_config binaries are available to resolve
+   compilation flags for ICU and PostgreSQL.
 2. Call 'make'.
-3. Copy the 'collkey_icu.so' to your PostgreSQL library directory,
-   i.e. cp collkey_icu.so /usr/local/pgsql/lib
+3. Call 'make install' to install into your PostgreSQL library directory.
+   You will probably need to prefix this with "sudo" if you are a non-root
+   user.
 
 Now you can use the 'collkey_icu.sql' file to enable the 'collkey' function
 for a database.

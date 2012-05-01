@@ -1,16 +1,15 @@
 Changelog
 
-2006-06-09:
-- initial release of version 0.1
+Version 0.4 (2011-02-18):
+- improved Makefile portability (Robin Smidsrød)
+- LICENSE changed to MIT License
 
-2006-12-26:
-- added support for PostgreSQL version 8.2
-
-Release of version 0.2
-
-
-2009-05-01:
+Version 0.3 (2009-05-01):
 - added support for PostgreSQL version 8.3
 
-Release of version 0.3
+Version 0.2 (2006-12-26):
+- added support for PostgreSQL version 8.2
+
+Version 0.1 (2006-06-09):
+- initial release
 
