@@ -1,0 +1,84 @@
+
+README for pg_collkey version 0.1
+
+Please read the LICENSE file, which is shipping with this software.
+
+
+*** DESCRIPTION ***
+
+This is a wrapper to use the collation functions of the ICU library with a
+PostgreSQL database server. Using this wrapper, you can specify the desired
+locale for sorting UTF-8 strings directly in the SQL query, rather than
+setting it during database installation. Default Unicode collation (DUCET)
+is supported. You can select whether puctuation should be a primary
+collation attribute or not. The level of comparison can be limited (in order
+to ignore accents for example). Numeric sequences of strings can be
+recognized, so that 'test2' is placed before 'test10'.
+
+
+*** REQUIREMENTS ***
+
+- PostgreSQL version 8.1.4, http://www.postgresql.org/
+  (might run with older versions too, but this is not tested)
+- ICU library version 3.4, http://icu.sourceforge.net/
+  (might run with older versions too, but this is not tested)
+
+
+*** INSTALLATION ***
+
+1. Edit the Makefile by setting a correct path to the library (icu_libdir)
+   and include (icu_incdir) directory of libicu.
+2. Call 'make'.
+3. Copy the 'collkey_icu.so' to your PostgreSQL library directory,
+   i.e. cp collkey_icu.so /usr/local/pgsql/lib
+
+Now you can use the 'collkey_icu.sql' file to enable the 'collkey' function
+for a database.
+
+
+*** CAVEATS ***
+
+The function will only work if the database encoding is set to UTF-8. This
+is a limitation which can be solved in future releases.
+Using different locales within one query can slow down perfomance.
+
+
+*** USAGE ***
+
+collkey (text, text, bool, int4, bool) RETURNS bytea
+
+The first parameter is the UTF-8 string for which you want a collation key.
+
+The second parameter is defining the locale (i.e. 'root' or 'de_DE',
+see http://icu.sourceforge.net/ for more information).
+Use 'root', if you want a default unicode collation (DUCET).
+
+If the third parameter is true, certain characters (puncuation, etc.) are
+processed at the 4th level (after processing of the case), instead of being
+processed at the 1st level.
+
+The fourth parameter is selecting the level of collation:
+0: default level (usually 3rd level)
+1: 1st level, only base characters are compared, accents, upper/lowercases
+   (and punctuation, if the third parameter is true) are ignored
+2: 2nd level, accents and modifications of characters are taken into account
+3: 3rd level, upper/lowercase is evaluated
+4: 4th level, other differences are evaluated
+5: 5th level, strings are only equal if they contain the same codepoints
+   (after normalization)
+
+The fifth parameter enables numeric sorting, if it is set to true.
+This means collkey('test 2') < collkey('test 10').
+
+There are shortcuts with fewer parameters, see 'collkey_icu.sql'.
+
+Example:
+
+SELECT name FROM tbl ORDER BY collkey(name, 'fr_FR');  -- french ordering
+
+
+*** TODO ***
+
+- enable support for non UTF-8 databases
+
+
