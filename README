@@ -10,7 +10,7 @@ This is a wrapper to use the collation functions of the ICU library with a
 PostgreSQL database server. Using this wrapper, you can specify the desired
 locale for sorting UTF-8 strings directly in the SQL query, rather than
 setting it during database installation. Default Unicode collation (DUCET)
-is supported. You can select whether puctuation should be a primary
+is supported. You can select whether punctuation should be a primary
 collation attribute or not. The level of comparison can be limited (in order
 to ignore accents for example). Numeric sequences of strings can be
 recognized, so that 'test2' is placed before 'test10'.

@@ -39,6 +39,10 @@
 #include <unicode/ucnv.h>
 #include <unicode/ucol.h>
 
+#ifdef PG_MODULE_MAGIC
+PG_MODULE_MAGIC;
+#endif
+
 
 static void pgsqlext_collkey_icu_error(UErrorCode uerror) {
   int sqlerrcode;
