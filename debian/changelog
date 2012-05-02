@@ -1,3 +1,9 @@
+postgresql-pg-collkey (0.5-1ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Oneiric build
+
+ -- Cody Cutrer <cody@cutrer.us>  Wed, 02 May 2012 15:22:34 -0600
+
 postgresql-pg-collkey (0.5-1ubuntu1) precise; urgency=low
 
   * Precise build
