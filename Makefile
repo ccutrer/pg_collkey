@@ -1,16 +1,24 @@
-ICU_CFLAGS = `icu-config --cppflags-searchpath`
-ICU_LDFLAGS = `icu-config --ldflags`
-PG_INCLUDE_DIR = `pg_config --includedir-server`
-PG_PKG_LIB_DIR = `pg_config --pkglibdir`
+EXTENSION    = pg_collkey
+EXTVERSION   = $(shell grep default_version $(EXTENSION).control | \
+               sed -e "s/default_version[[:space:]]*=[[:space:]]*'\([^']*\)'/\1/")
 
-collkey_icu.so: collkey_icu.o
-	ld -shared -o collkey_icu.so collkey_icu.o $(ICU_LDFLAGS)
+DATA         = $(filter-out $(wildcard *--*.sql),$(wildcard *.sql))
+MODULE_big   = collkey_icu
+OBJS         = collkey_icu.o
+PG_CONFIG    = pg_config
+PG91         = $(shell $(PG_CONFIG) --version | grep -qE " 8\.| 9\.0" && echo no || echo yes)
+SHLIB_LINK   = $(shell icu-config --ldflags)
+PG_CPPFLAGS  = $(shell icu-config --cppflags-searchpath)
 
-collkey_icu.o: collkey_icu.c
-	gcc -Wall -fPIC $(ICU_CFLAGS) -I $(PG_INCLUDE_DIR) -o collkey_icu.o -c collkey_icu.c
+ifeq ($(PG91),yes)
+all: $(EXTENSION)--$(EXTVERSION).sql
 
-clean:
-	rm -f *.o *.so
+$(EXTENSION)--$(EXTVERSION).sql: collkey_icu.sql
+	cp $< $@
 
-install:
-	install collkey_icu.so $(PG_PKG_LIB_DIR)
+DATA = $(wildcard *--*.sql) $(EXTENSION)--$(EXTVERSION).sql
+EXTRA_CLEAN = $(EXTENSION)--$(EXTVERSION).sql
+endif
+
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+include $(PGXS)

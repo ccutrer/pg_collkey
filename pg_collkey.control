@@ -1,0 +1,5 @@
+# pg_collkey extension
+comment = 'ICU collation function wrapper'
+default_version = '0.5.0'
+module_pathname = '$libdir/collkey_icu'
+relocatable = true

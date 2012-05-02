@@ -1,0 +1,25 @@
+{
+   "name": "pg_collkey",
+   "abstract": "ICU collation function wrapper",
+   "version": "0.5.0",
+   "maintainer": "Cody Cutrer <cody@cutrer.us>",
+   "license": "mit",
+   "provides": {
+     "pg_collkey": {
+       "file": "collkey_icu.sql",
+       "version": "0.5.0"
+     }
+   },
+   "meta-spec": {
+      "version": "1.0.0",
+      "url": "http://pgxn.org/meta/spec.txt"
+   },
+   "resources": {
+     "homepage": "http://www.public-software-group.org/pg_collkey",
+     "repository": {
+       "url": "git://github.com/ccutrer/pg_collkey.git",
+       "web": "http://github.com/ccutrer/pg_collkey.git",
+       "type": "git"
+     }
+   }
+}
