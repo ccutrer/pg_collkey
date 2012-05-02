@@ -1,3 +1,9 @@
+postgresql-pg-collkey (0.5-1ubuntu1) precise; urgency=low
+
+  * Precise build
+
+ -- Cody Cutrer <cody@cutrer.us>  Wed, 02 May 2012 15:21:44 -0600
+
 postgresql-pg-collkey (0.5-1) unstable; urgency=low
 
   * Initial release.
